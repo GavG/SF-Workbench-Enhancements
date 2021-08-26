@@ -1,0 +1,16 @@
+{
+  "name": "SF Workbench Enhancements",
+  "description": "Just makes it better, esp for SOQL UI",
+  "version": "1.0",
+  "icons": {
+    "128": "wbe_logo.png"
+  },
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://workbench.developerforce.com/*"],
+      "css": ["wb_enhance.css"],
+      "js": ["wb_enhance.js"]
+    }
+  ]
+}
