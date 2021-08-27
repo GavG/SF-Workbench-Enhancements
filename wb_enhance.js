@@ -31,15 +31,29 @@ function selectToDatalist(select, placeholder, changeEvent = null) {
   eSelect.parentNode.append(eDatalist)
   eSelect.parentNode.replaceChild(eInput, eSelect)
 
+  eInputClear = document.createElement("button")
+  eInputClear.type = 'button'
+  eInputClear.innerText = 'x'
+  eInputClear.classList.add('btn-clear')
+  eInputClear.setAttribute(
+    "onClick",
+    "document.getElementById('" + eInput.id + "').value=''"
+  )
+  insertAfter(eInputClear, eInput)
+
   return eInput
+}
+
+function insertAfter(newNode, referenceNode) {
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
 function main() {
   console.log("Sf WBE Loaded")
-  let selectInputElement = document.getElementById("QB_object_sel")
+  let selectTableInputElement = document.getElementById("QB_object_sel")
 
-  if (selectInputElement) {
-    selectToDatalist(selectInputElement, "Table", "updateObject()")
+  if (selectTableInputElement) {
+    selectToDatalist(selectTableInputElement, "Table", "if(this.value){updateObject()}")
   }
 }
 

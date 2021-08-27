@@ -6,3 +6,12 @@ select[multiple]:hover {
 select[multiple] option {
     padding:2px;
 }
+
+select:not([multiple]) {
+    max-width: 75%;
+}
+
+button.btn-clear {
+    color: #FFF;
+    background-color: #F22;
+}
