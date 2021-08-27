@@ -2,59 +2,78 @@
  * @param {HTMLElement} select
  * @param {string} placeholder
  */
-function selectToDatalist(select, placeholder, changeEvent = null) {
-  var eSelect = select,
-    options = eSelect.children,
-    eInput = document.createElement("input"),
-    eDatalist = document.createElement("datalist"),
-    selected
+function selectToDatalist(selectElementId, placeholder, changeEvent = null) {
+    let select = document.getElementById(selectElementId)
 
-  for (let option of options) {
-    if (option.selected) {
-      selected = option.value
+    if (!select) {
+        return;
     }
 
-    eDatalist.appendChild(option.cloneNode())
-  }
+    var eSelect = select,
+        options = eSelect.children,
+        eInput = document.createElement("input"),
+        eDatalist = document.createElement("datalist"),
+        selected;
 
-  eDatalist.id = "datalist-" + eSelect.name
+    for (let option of options) {
+        if (option.selected) {
+            selected = option.value;
+        }
 
-  eInput.name = eSelect.name
-  eInput.id = eSelect.id
-  eInput.setAttribute("onChange", changeEvent)
-  eInput.setAttribute("list", eDatalist.id)
-  eInput.setAttribute("multiple", true)
-  eInput.placeholder = placeholder || "Enter your " + eInput.name
+        eDatalist.appendChild(option.cloneNode());
+    }
 
-  selected && (eInput.value = selected)
+    eDatalist.id = "datalist-" + eSelect.name;
 
-  eSelect.parentNode.append(eDatalist)
-  eSelect.parentNode.replaceChild(eInput, eSelect)
+    eInput.name = eSelect.name;
+    eInput.id = eSelect.id;
+    eInput.setAttribute("onChange", changeEvent);
+    eInput.setAttribute("list", eDatalist.id);
+    eInput.setAttribute("multiple", true);
+    eInput.placeholder = placeholder || "Enter your " + eInput.name;
 
-  eInputClear = document.createElement("button")
-  eInputClear.type = 'button'
-  eInputClear.innerText = 'x'
-  eInputClear.classList.add('btn-clear')
-  eInputClear.setAttribute(
-    "onClick",
-    "document.getElementById('" + eInput.id + "').value=''"
-  )
-  insertAfter(eInputClear, eInput)
+    selected && (eInput.value = selected);
 
-  return eInput
+    eSelect.parentNode.append(eDatalist);
+    eSelect.parentNode.replaceChild(eInput, eSelect);
+
+    eInputClear = document.createElement("button");
+    eInputClear.type = "button";
+    eInputClear.innerText = "x";
+    eInputClear.classList.add("btn-clear");
+    eInputClear.setAttribute(
+        "onClick",
+        "document.getElementById('" + eInput.id + "').value=''"
+    );
+    insertAfter(eInputClear, eInput);
+
+    return eInput;
 }
 
 function insertAfter(newNode, referenceNode) {
-  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
 function main() {
-  console.log("Sf WBE Loaded")
-  let selectTableInputElement = document.getElementById("QB_object_sel")
+    console.log("Sf WBE Loaded");
 
-  if (selectTableInputElement) {
-    selectToDatalist(selectTableInputElement, "Table", "if(this.value){updateObject()}")
-  }
+    selectToDatalist(
+        "QB_object_sel",
+        "Table",
+        "if(this.value){updateObject()}"
+    );
+
+    selectToDatalist(
+        "QB_filter_field_0",
+        "Filter By",
+        "buildQuery()"
+    );
+
+    selectToDatalist(
+        "QB_orderby_field",
+        "Order By",
+        "buildQuery()"
+    );
 }
 
-window.addEventListener("load", main)
+window.addEventListener("load", main);
