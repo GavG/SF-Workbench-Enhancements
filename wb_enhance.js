@@ -54,26 +54,26 @@ function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
+function loginPage() {
+    document.getElementById("termsAccepted").checked = true;
+}
+
+function queryPage() {
+    selectToDatalist("QB_object_sel", "Table", "if(this.value){updateObject()}");
+    selectToDatalist("QB_filter_field_0", "Filter By", "buildQuery()");
+    selectToDatalist("QB_orderby_field", "Order By", "buildQuery()");
+}
+
 function main() {
     console.log("Sf WBE Loaded");
 
-    selectToDatalist(
-        "QB_object_sel",
-        "Table",
-        "if(this.value){updateObject()}"
-    );
+    switch (window.location.pathname) {
+        case '/login.php':
+            return loginPage()
 
-    selectToDatalist(
-        "QB_filter_field_0",
-        "Filter By",
-        "buildQuery()"
-    );
-
-    selectToDatalist(
-        "QB_orderby_field",
-        "Order By",
-        "buildQuery()"
-    );
+        case '/query.php':
+            return queryPage()
+    }
 }
 
 window.addEventListener("load", main);
