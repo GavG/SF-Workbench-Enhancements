@@ -15,3 +15,7 @@ button.btn-clear {
     color: #FFF;
     background-color: #F22;
 }
+
+table.dataTable tr:nth-child(even) {
+    background-color: #E2E2FA;
+}
