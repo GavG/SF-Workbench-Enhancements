@@ -1,6 +1,15 @@
+#mainBlock {
+    width: calc(100% - 20px)!important;
+}
+
+select[multiple] {
+    transition: width 0.3s, height 0.3s;
+    height: 12em;
+}
+
 select[multiple]:hover {
-    height: 50vh;
-    width: 18rem;
+    height: 50vh!important;
+    width: 30rem!important;
 }
 
 select[multiple] option {
