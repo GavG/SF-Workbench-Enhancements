@@ -17,27 +17,27 @@ function selectToDatalist(selectElementId, placeholder, changeEvent = null) {
 
     for (let option of options) {
         if (option.selected) {
-            selected = option.value;
+            selected = option.value
         }
 
-        eDatalist.appendChild(option.cloneNode());
+        eDatalist.appendChild(option.cloneNode())
     }
 
     eDatalist.id = "datalist-" + eSelect.name;
 
     eInput.name = eSelect.name;
     eInput.id = eSelect.id;
-    eInput.setAttribute("onChange", changeEvent);
-    eInput.setAttribute("list", eDatalist.id);
-    eInput.setAttribute("multiple", true);
-    eInput.placeholder = placeholder || "Enter your " + eInput.name;
+    eInput.setAttribute("onChange", changeEvent)
+    eInput.setAttribute("list", eDatalist.id)
+    eInput.setAttribute("multiple", true)
+    eInput.placeholder = placeholder || "Enter your " + eInput.name
 
-    selected && (eInput.value = selected);
+    selected && (eInput.value = selected)
 
-    eSelect.parentNode.append(eDatalist);
-    eSelect.parentNode.replaceChild(eInput, eSelect);
+    eSelect.parentNode.append(eDatalist)
+    eSelect.parentNode.replaceChild(eInput, eSelect)
 
-    eInputClear = document.createElement("button");
+    eInputClear = document.createElement("button")
     eInputClear.type = "button";
     eInputClear.innerText = "x";
     eInputClear.classList.add("btn-clear");
@@ -51,17 +51,22 @@ function selectToDatalist(selectElementId, placeholder, changeEvent = null) {
 }
 
 function insertAfter(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling)
 }
 
 function loginPage() {
-    document.getElementById("termsAccepted").checked = true;
+    document.getElementById("termsAccepted").checked = true
+}
+
+function selectPage() {
+    document.getElementById("actionJump").value="query.php"
+    selectToDatalist("default_object", "Object", "")
 }
 
 function queryPage() {
-    selectToDatalist("QB_object_sel", "Table", "if(this.value){updateObject()}");
-    selectToDatalist("QB_filter_field_0", "Filter By", "buildQuery()");
-    selectToDatalist("QB_orderby_field", "Order By", "buildQuery()");
+    selectToDatalist("QB_object_sel", "Table", "if(this.value){updateObject()}")
+    selectToDatalist("QB_filter_field_0", "Filter By", "buildQuery()")
+    selectToDatalist("QB_orderby_field", "Order By", "buildQuery()")
 }
 
 function main() {
@@ -71,9 +76,12 @@ function main() {
         case '/login.php':
             return loginPage()
 
+        case '/select.php':
+            return selectPage()
+
         case '/query.php':
             return queryPage()
     }
 }
 
-window.addEventListener("load", main);
+window.addEventListener("load", main)
